@@ -4,7 +4,6 @@ from pprint import pprint
 def form_cook_book(file, path = os.getcwd()):
     with open('cook_book.txt', 'rt', encoding='utf-8') as f:
         cook_book = {}
-            # ingrs = []
         for string in f:
             dish = string.strip()
             ingrs_count = int(f.readline().strip())
@@ -51,5 +50,9 @@ def get_text(files, path = os.getcwd()):
 
 
 book = form_cook_book('cook_book.txt')
-count_ingredients(book, ['Омлет', 'Фахитос', 'Карбонара'], 3)
+pprint(book, sort_dicts=False)
+
+counter_ingrs = count_ingredients(book, ['Омлет', 'Фахитос', 'Карбонара'], 3)
+pprint(counter_ingrs, sort_dicts=False)
+
 get_text(['1.txt', '2.txt', '3.txt'], os.path.join(os.getcwd(), 'files_task3'))
