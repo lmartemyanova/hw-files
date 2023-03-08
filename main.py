@@ -14,7 +14,6 @@ def form_cook_book(file, path = os.getcwd()):
                 ingredients.append({'ingredient_name': ingredient_name, 'quantity': int(quantity), 'measure': measure})
             f.readline()
             cook_book[dish] = ingredients
-        # pprint(cook_book, sort_dicts=False)
         return cook_book
 
 
@@ -36,5 +35,21 @@ def count_ingredients(cook_book, dishes, person_count):
     return purchase
 
 
+def get_text(files, path = os.getcwd()):
+    texts = []
+    for file in files:
+        file_path = os.path.join(path, file)
+        with open(file_path, 'rt', encoding='utf-8') as f:
+            file_text = [x for x in f.readlines()]
+            file_text = [file + '\n', str(len(file_text)) + '\n'] + file_text + ['\n']
+            texts.append(file_text)
+    texts.sort(key=len)
+    final_path = os.path.join(path, 'final_text.txt')
+    with open(final_path, 'w', encoding='utf-8') as f:
+        for text in texts:
+            f.writelines(''.join(text))
+
+
 book = form_cook_book('cook_book.txt')
-pprint(count_ingredients(book, ['Омлет', 'Фахитос', 'Карбонара'], 3))
+count_ingredients(book, ['Омлет', 'Фахитос', 'Карбонара'], 3)
+get_text(['1.txt', '2.txt', '3.txt'], os.path.join(os.getcwd(), 'files_task3'))
